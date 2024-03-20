@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: textFade
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":614.9498,"y":102.4158},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":276.0,"y":-96.0},"guid":"ea1ae122-c42c-4607-a278-d771e083be53","$version":"A","$type":"Unity.VisualScripting.Update","$id":"9"},{"chainable":false,"parameterNames":["alpha","duration","ignoreTimeScale"],"member":{"name":"CrossFadeAlpha","parameterTypes":["System.Single","System.Single","System.Boolean"],"targetType":"TMPro.TextMeshProUGUI","targetTypeName":"TMPro.TextMeshProUGUI","$version":"A"},"defaultValues":{"target":null,"%alpha":{"$content":255.0,"$type":"System.Single"},"%duration":{"$content":3.0,"$type":"System.Single"},"%ignoreTimeScale":{"$content":false,"$type":"System.Boolean"}},"position":{"x":751.0,"y":-98.0},"guid":"a9dcabda-7e13-461d-9523-f9bc023fb77b","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"11"},{"specifyFallback":false,"kind":"Object","defaultValues":{"name":{"$content":"fadePerSecond","$type":"System.String"},"object":null},"position":{"x":375.0,"y":40.0},"guid":"87e08798-5aad-4524-943d-5b3e99090dff","$version":"A","$type":"Unity.VisualScripting.GetVariable","$id":"15"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"11"},"destinationKey":"enter","guid":"24bb9ab4-be8b-4a6a-a4d5-799f14f42257","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"value","destinationUnit":{"$ref":"11"},"destinationKey":"%alpha","guid":"70f9aebd-2b9c-463c-ba8d-40ea191e1c71","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []
