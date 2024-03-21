@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 7740267300724266622}
   - component: {fileID: 8107891356582712126}
   - component: {fileID: 460601128756366045}
+  - component: {fileID: 1724375451594700341}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -218,7 +219,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -309,7 +310,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21011695}
+  m_Offset: {x: 0, y: 0.11945608}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -320,7 +321,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5797661}
+  m_Size: {x: 1, y: 0.76108783}
   m_EdgeRadius: 0
 --- !u!58 &7740267300724266622
 CircleCollider2D:
@@ -392,3 +393,11 @@ MonoBehaviour:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
     - {fileID: 11400000, guid: fa68725ea907b634e866f87f9381112b, type: 2}
+--- !u!81 &1724375451594700341
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460631641129579065}
+  m_Enabled: 1
