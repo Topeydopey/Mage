@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MovingPlatform
   - SoundManager
+  - Obstacle
   layers:
   - Default
   - TransparentFX
