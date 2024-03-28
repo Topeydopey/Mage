@@ -7,6 +7,7 @@ TagManager:
   - MovingPlatform
   - SoundManager
   - Obstacle
+  - Inhibitor
   layers:
   - Default
   - TransparentFX
