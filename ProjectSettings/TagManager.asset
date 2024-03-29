@@ -8,6 +8,9 @@ TagManager:
   - SoundManager
   - Obstacle
   - Inhibitor
+  - Fireball
+  - DontDestroy
+  - Runes
   layers:
   - Default
   - TransparentFX
