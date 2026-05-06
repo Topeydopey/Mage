@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
   - MovingPlatform
   - SoundManager
@@ -48,3 +48,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI Block
+    uniqueID: 3822709841
+    locked: 0
+  m_RenderingLayers:
+  - Default
