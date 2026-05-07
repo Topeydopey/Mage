@@ -8,20 +8,28 @@ public sealed class PlayerMovement2D : MonoBehaviour
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference jumpAction;
 
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed = 7f;
+    [Header("Horizontal Movement")]
+    [SerializeField] private float maxMoveSpeed = 7f;
+    [SerializeField] private float accelerationForce = 45f;
+    [SerializeField] private float airAccelerationMultiplier = 0.55f;
+
+    [Header("Damping / Inertia Feel")]
+    [SerializeField] private float movingLinearDamping = 1.2f;
+    [SerializeField] private float stoppingLinearDamping = 5.5f;
+    [SerializeField] private float airLinearDamping = 0.4f;
 
     [Header("Jumping")]
-    [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private bool cancelVerticalVelocityBeforeJump = true;
+    [SerializeField] private float jumpForce = 11f;
+    [SerializeField] private bool resetVerticalVelocityOnJump = true;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheckPoint;
-    [SerializeField] private float groundCheckRadius = 0.45f;
-    [SerializeField] private float groundCheckDistance = 0.1f;
+    [SerializeField] private float groundCheckRadius = 0.28f;
+    [SerializeField] private float groundCheckDistance = 0.08f;
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D rb;
+
     private float moveInput;
     private bool jumpRequested;
     private bool isGrounded;
@@ -45,36 +53,34 @@ public sealed class PlayerMovement2D : MonoBehaviour
 
     private void Update()
     {
-        ReadMovementInput();
-        ReadJumpInput();
+        ReadInput();
     }
 
     private void FixedUpdate()
     {
         CheckGrounded();
-        ApplyMovement();
+        ApplyDamping();
+        ApplyHorizontalMovement();
+        LimitHorizontalSpeed();
         ApplyJump();
     }
 
-    private void ReadMovementInput()
+    private void ReadInput()
     {
-        if (moveAction == null)
+        if (moveAction != null)
+        {
+            Vector2 moveValue = moveAction.action.ReadValue<Vector2>();
+            moveInput = moveValue.x;
+        }
+        else
         {
             moveInput = 0f;
-            return;
         }
 
-        Vector2 inputValue = moveAction.action.ReadValue<Vector2>();
-        moveInput = inputValue.x;
-    }
-
-    private void ReadJumpInput()
-    {
-        if (jumpAction == null)
-            return;
-
-        if (jumpAction.action.WasPressedThisFrame())
+        if (jumpAction != null && jumpAction.action.WasPressedThisFrame())
+        {
             jumpRequested = true;
+        }
     }
 
     private void CheckGrounded()
@@ -94,11 +100,42 @@ public sealed class PlayerMovement2D : MonoBehaviour
         isGrounded = hit.collider != null;
     }
 
-    private void ApplyMovement()
+    private void ApplyDamping()
+    {
+        if (!isGrounded)
+        {
+            rb.linearDamping = airLinearDamping;
+            return;
+        }
+
+        bool playerIsTryingToMove = Mathf.Abs(moveInput) > 0.01f;
+
+        rb.linearDamping = playerIsTryingToMove
+            ? movingLinearDamping
+            : stoppingLinearDamping;
+    }
+
+    private void ApplyHorizontalMovement()
+    {
+        if (Mathf.Abs(moveInput) <= 0.01f)
+            return;
+
+        float acceleration = isGrounded
+            ? accelerationForce
+            : accelerationForce * airAccelerationMultiplier;
+
+        rb.AddForce(Vector2.right * moveInput * acceleration, ForceMode2D.Force);
+    }
+
+    private void LimitHorizontalSpeed()
     {
         Vector2 velocity = rb.linearVelocity;
-        velocity.x = moveInput * moveSpeed;
-        rb.linearVelocity = velocity;
+
+        if (Mathf.Abs(velocity.x) > maxMoveSpeed)
+        {
+            velocity.x = Mathf.Sign(velocity.x) * maxMoveSpeed;
+            rb.linearVelocity = velocity;
+        }
     }
 
     private void ApplyJump()
@@ -111,7 +148,7 @@ public sealed class PlayerMovement2D : MonoBehaviour
         if (!isGrounded)
             return;
 
-        if (cancelVerticalVelocityBeforeJump)
+        if (resetVerticalVelocityOnJump)
         {
             Vector2 velocity = rb.linearVelocity;
             velocity.y = 0f;
